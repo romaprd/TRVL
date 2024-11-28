@@ -45,6 +45,15 @@ def criar_projeto(id_usuario,destino,data_prevista,status,imagem,gastos,dinheiro
     finally:
         conexao.close()  
 
+def buscar_viagens(id_usuario):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    cursor.execute("SELECT destino, data_prevista, status, imagem FROM projetos_de_viagem WHERE id_usuario = ?", (id_usuario,))
+    viagens = cursor.fetchall()
+    conexao.close()
+
+    return viagens
+
 if __name__ == '__main__': 
     conexao = conectar_banco()
     cursos = conexao.cursor()
