@@ -7,13 +7,20 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.0">
 </head>
 
 <body id="cadastro">
-
+    <div class="header">
+        <header>
+            <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+            <div class="user-info">
+                <H1>Cadastro</H1>
+            </div>
+        </header>
+        <hr>
+    </div>
     <div class="form-container">
-        <h2>Cadastro</h2>
         <form action="/cadastrar" method="POST">
             <div class="form-group">
                 <label for="usuario">Usuário</label>
@@ -34,7 +41,6 @@
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>
-
 </body>
 
 </html>

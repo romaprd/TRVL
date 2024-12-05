@@ -10,6 +10,10 @@ app.secret_key = 'chave_secreta_muito_segura'
 def index ():
     return render_template('index.html')
 
+@app.route('/planejamento')
+def planejamento ():
+    return render_template('planejamento.html')
+
 # Rota da página de cadastro
 @app.route('/cadastro')
 def cadastro ():
