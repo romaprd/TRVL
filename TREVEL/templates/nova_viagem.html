@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Nova Viagem</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-
+    <header>
+        <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+        <div class="user-info">
+            <H1><h2>Criar Nova Viagem</h2></H1>
+        </div>
+    </header>
+    <hr>
 <div class="container mt-5">
-    <h2>Criar Nova Viagem</h2>
+    
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}

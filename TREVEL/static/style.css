@@ -24,10 +24,11 @@ header {
     height: 150px; 
 }
 
-.user-info {
+.user-info h1,h2 {
     display: flex;
     align-items: center;
     padding: 10px
+    font-family: "Baskervville", serif;
 }
 
 .user-info p {
@@ -147,9 +148,11 @@ body {
     background-color: #e8dfca;
     border-color: #e8dfca;
     color: #154f35;
+    margin-right: 35px;
 }
-.botoes{
+.botoes {
     display: flex;
+    
 }
 
 .botoes .primario {
@@ -214,4 +217,23 @@ hr {
 
 .container h2 {
     color: #1a4d2e;
+}
+
+.logout {
+    background-color: #e8dfca;
+    color: #1a4d2e;
+    padding: 20px;
+    border-radius: 25px;
+    margin-right: 30px;
+}
+
+.fileira { 
+    margin-top: 80px;
+    text-align: right;
+    margin-bottom: 60px;
+    
+}
+
+.card-body{
+    color: #154f35;
 }

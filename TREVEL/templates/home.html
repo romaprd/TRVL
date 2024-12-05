@@ -12,14 +12,15 @@
 </head>
 
 <body>
-
-    <h1>Bem-vindo, {{ usuario }}!</h1> <!-- Exibe o email do usuário -->
-    <a href="{{ url_for('logout') }}">Sair</a>
-    <br>
-    <a href="/nova" class="btn btn-primary">Planejar uma viagem</a>
-
+    <header>
+        <a href="/"><img src="static/imgs/logo.png" alt="Logo TRVL" class="logo"></a>
+        <div class="user-info">
+            <H1><h1>Bem-vindo, {{ usuario }}!</h1></H1>
+        </div>
+    </header>
+    <hr>
     <div class="container mt-5">
-        <h2>Viagens de {{ usuario }}</h2>
+        <h2> Acompanhamento de Viagem</h2>
         <div class="row">
             {% for viagem in viagens %}
             <div class="col-md-4">
@@ -43,9 +44,11 @@
             {% endfor %}
 
         </div>
-
     </div>
-
+    <div class="fileira">
+        <a href="/nova" class="btn btn-primary">Nova Viagem</a>
+        <a href="{{ url_for('logout') }}" class="logout">Sair</a>
+    </div>
 </body>
 
 </html>
