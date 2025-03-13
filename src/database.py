@@ -21,8 +21,8 @@ def criar_usuario(email, nome, senha):
     cursor = conexao.cursor()
     
     try:
-        cursor.execute('INSERT INTO usuarios(email,nome,senha ) values (?, ?, ?)'
-                       ,(email,nome,senha))
+        # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
+        cursor.execute('DIGITE AQUI O COMANDO PARA INSERIR UM NOVO USUÁRIO')
         conexao.commit()
         return True
     except sqlite3.IntegrityError:
@@ -48,7 +48,8 @@ def criar_projeto(id_usuario,destino,data_prevista,status,imagem,gastos,dinheiro
 def buscar_viagens(id_usuario):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute("SELECT destino, data_prevista, status, imagem FROM projetos_de_viagem WHERE id_usuario = ?", (id_usuario,))
+    # PREENCHA AQUI, BUSCAR TODAS AS VIAGENS ordem: destino, data prevista, status, imagem
+    cursor.execute("DIGITE AQUI O COMANDO PARA BUSCAR AS VIAGENS")
     viagens = cursor.fetchall()
     conexao.close()
 
