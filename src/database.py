@@ -29,6 +29,36 @@ def criar_usuario(email, nome, senha):
         return False
     finally:
         conexao.close()
+        
+def mudar_nome_usuario(nome, email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        #codigo para alterar o nome do usuario
+        cursor.execute('UPDATE usuarios SET nome = ? WHERE email = ?',(nome, email,))
+        conexao.commit()
+        viagens = cursor.fetchall()
+        return viagens
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
+        
+def mudar_senha_usuario(senha, email):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        #codigo para alterar o nome do usuario
+        cursor.execute('UPDATE usuarios SET senha = ? WHERE email = ?',(senha, email,))
+        conexao.commit()
+        viagens = cursor.fetchall()
+        return viagens
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
 
 def criar_projeto(id_usuario,destino,data_prevista,status,imagem,gastos,dinheiro_guardado):
     conexao = conectar_banco()
@@ -55,19 +85,19 @@ def buscar_viagens(id_usuario):
 
     return viagens
 
-def apagar_viagem(id_viagem):
-    conexao = conectar_banco()
-    cursor = conexao.cursor()
+# def apagar_viagem(id_viagem):
+#     conexao = conectar_banco()
+#     cursor = conexao.cursor()
     
-    try:
-        # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
-        cursor.execute('DELETE FROM projetos_de_viagem WHERE id = ?', id_viagem)
-        conexao.commit()
-        return True
-    except sqlite3.IntegrityError:
-        return False
-    finally:
-        conexao.close()
+#     try:
+#         # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
+#         cursor.execute('DELETE FROM projetos_de_viagem WHERE id = ?', id_viagem)
+#         conexao.commit()
+#         return True
+#     except sqlite3.IntegrityError:
+#         return False
+#     finally:
+#         conexao.close()
         
 def mostrar_id_viagens(id_email):
     conexao = conectar_banco()
@@ -85,6 +115,21 @@ def mostrar_id_viagens(id_email):
     finally:
         conexao.close()
         
+def editar_viagem(destino,data_prevista,status,imagem,gastos,dinheiro_guardado, id_usuario):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        #codigo para alterar o nome do usuario
+        cursor.execute('UPDATE projetos_de_viagem SET destino = ?, data_prevista = ?, status = ?, imagem = ?, gastos = ?, dinheiro_guardado = ? WHERE id_usuario = ?',(destino, data_prevista, status, imagem, gastos, dinheiro_guardado, id_usuario,))
+        conexao.commit()
+        viagens = cursor.fetchall()
+        return viagens
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
+        
 def apagar_usuario(usuarios):
     conexao = conectar_banco()
     cursor = conexao.cursor()
@@ -92,6 +137,10 @@ def apagar_usuario(usuarios):
     try:
         # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
         cursor.execute('DELETE FROM usuarios WHERE email = ?',(usuarios,))
+        
+        #apaga todas as viagens criadas por ela
+        cursor.execute('DELETE FROM projetos_de_viagem WHERE id_usuario = ?',(usuarios,))
+         
         conexao.commit()
         return True
     except sqlite3.IntegrityError:
@@ -102,9 +151,12 @@ def apagar_usuario(usuarios):
 if __name__ == '__main__': 
     conexao = conectar_banco()
     criar_tabelas()
-    id_viagens = mostrar_id_viagens("rodfsjanvjsanf@gmail.com")
+    id_viagens = mostrar_id_viagens("deyvysilva2006@gmail.com")
     print(id_viagens)
     
-    apagar_viagem("1")
+    editar_viagem("mosqueiro", "12/20/2923873", "andando", "", "20.000", "120.00.00", "deyvysilva2006@gmail.com")
+    mudar_nome_usuario("romario", "deyvysilva2006@gmail.com")
+    mudar_senha_usuario("13579", "deyvysilva2006@gmail.com")
+    # apagar_viagem("1")
     
-    apagar_usuario("rodfsjanvjsanf@gmail.com")
+    # apagar_usuario("rodfsjanvjsanf@gmail.com")
