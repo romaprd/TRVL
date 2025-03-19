@@ -10,6 +10,9 @@ def criar_tabelas():
     cursor.execute('''create table if not exists usuarios
                    (email text primary key,nome text,senha text)''')
     
+    cursor.execute('''create table if not exists usuarios_projetos
+                   (id integer primary key, email_usuario text, id_projeto integer)''')
+    
     cursor.execute('''create table if not exists projetos_de_viagem
                    (id integer primary key,id_usuario text,destino text,data_prevista text,
                    status text,imagem text,gastos real,dinheiro_guardado real)''')
@@ -23,6 +26,20 @@ def criar_usuario(email, nome, senha):
     try:
         # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
         cursor.execute('insert into usuarios(email, nome, senha) VALUES (?, ?, ?)', (email, nome, senha))
+        conexao.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
+        
+def adc_new_usuario(email, idprojeto):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    try:
+        # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
+        cursor.execute('insert into usuarios_projetos(email_usuario, id_projeto) VALUES (?, ?)', (email, idprojeto))
         conexao.commit()
         return True
     except sqlite3.IntegrityError:
@@ -154,9 +171,12 @@ if __name__ == '__main__':
     id_viagens = mostrar_id_viagens("deyvysilva2006@gmail.com")
     print(id_viagens)
     
-    editar_viagem("mosqueiro", "12/20/2923873", "andando", "", "20.000", "120.00.00", "deyvysilva2006@gmail.com")
-    mudar_nome_usuario("romario", "deyvysilva2006@gmail.com")
-    mudar_senha_usuario("13579", "deyvysilva2006@gmail.com")
+    adc_new_usuario("deyvyalex2006@gmail.com", 1)
+    # editar_viagem("mosqueiro", "09/05/2025", "planejado", "https://www.passeios.org/wp-content/uploads/2022/07/01_3-1.jpg", "10.000.00", "12.000.00", "deyvysilva2006@gmail.com")
+    # mudar_nome_usuario("romario", "deyvysilva2006@gmail.com")
+    # mudar_senha_usuario("13579", "deyvysilva2006@gmail.com")
     # apagar_viagem("1")
     
     # apagar_usuario("rodfsjanvjsanf@gmail.com")
+    
+    # SELECT projetos_de_viagem.destino FROM projetos_de_viagem, usuarios_projetos WHERE projetos_de_viagem.id = usuarios_projetos.id_projeto AND usuarios_projetos.email_usuario = 'deyvyalex2006@gmail.com'
