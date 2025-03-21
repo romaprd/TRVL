@@ -96,25 +96,25 @@ def buscar_viagens(id_usuario):
     conexao = conectar_banco()
     cursor = conexao.cursor()
     # PREENCHA AQUI, BUSCAR TODAS AS VIAGENS ordem: destino, data_prevista, status, imagem
-    cursor.execute("SELECT destino, data_prevista, status, imagem FROM projetos_de_viagem WHERE id_usuario = ?", (id_usuario,))
+    cursor.execute("SELECT destino, data_prevista, status, imagem, id FROM projetos_de_viagem WHERE id_usuario = ?", (id_usuario,))
     viagens = cursor.fetchall()
     conexao.close()
 
     return viagens
 
-# def apagar_viagem(id_viagem):
-#     conexao = conectar_banco()
-#     cursor = conexao.cursor()
+def apagar_viagem(id_viagem):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
     
-#     try:
-#         # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
-#         cursor.execute('DELETE FROM projetos_de_viagem WHERE id = ?', id_viagem)
-#         conexao.commit()
-#         return True
-#     except sqlite3.IntegrityError:
-#         return False
-#     finally:
-#         conexao.close()
+    try:
+        # PREENCHA AQUI - QUAL O COMANDO CRIAR UM NOVO USUÁRIO
+        cursor.execute('DELETE FROM projetos_de_viagem WHERE id = ?', id_viagem)
+        conexao.commit()
+        return True
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conexao.close()
         
 def mostrar_id_viagens(id_email):
     conexao = conectar_banco()

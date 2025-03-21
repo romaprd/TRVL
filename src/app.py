@@ -97,6 +97,17 @@ def nova_viagem():
         flash("Viagem criada com sucesso!", "success")
         return redirect(url_for('home'))
     return render_template('nova_viagem.html')
+@app.route('/excluir-viagem', methods=['POST'])
+def excluir_viagem():
+    viagem_id = request.form.get('viagem_id')  #obtem o id da viagem do formulario
+    database.apagar_viagem(viagem_id) #passa o id para a funcao que exclui a viagem
+    return redirect(url_for('home'))
+
+@app.route('/excluir-usuario', methods=['POST'])
+def excluir_usuario():
+    usuario_id = request.form.get('usuario_id')  #obtem o id da viagem do formulario
+    database.apagar_usuario(usuario_id) #passa o id para a funcao que exclui a viagem
+    return redirect(('/usuarios'))
 
 if __name__ == '__main__':
     app.run(debug=True) 

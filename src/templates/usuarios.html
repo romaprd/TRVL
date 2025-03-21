@@ -31,6 +31,12 @@
                 <td>{{ usuario[0] }}</td>
                 <td>{{ usuario[1] }}</td>
                 <td>{{ usuario[2] }}</td>
+                <td>
+                    <form action="{{url_for('excluir_usuario') }}" method="POST">
+                        <input type="hidden" name="usuario_id" value="{{usuario[0] }}"> <!-- ID-->
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
